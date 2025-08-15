@@ -82,14 +82,14 @@ drawBoard();
 
 window.addEventListener("keydown", (e) => {
   const key = e.key;
-  if ((DIRECTION = "TOP" && key === "ArrowDown")) {
-  } else if (key === "ArrowUp") {
+
+  if (key === "ArrowUp" && DIRECTION !== "BOTTOM") {
     DIRECTION = "TOP";
-  } else if (key === "ArrowDown") {
+  } else if (key === "ArrowDown" && DIRECTION !== "TOP") {
     DIRECTION = "BOTTOM";
-  } else if (key === "ArrowRight") {
+  } else if (key === "ArrowRight" && DIRECTION !== "LEFT") {
     DIRECTION = "RIGHT";
-  } else if (key === "ArrowLeft") {
+  } else if (key === "ArrowLeft" && DIRECTION !== "RIGHT") {
     DIRECTION = "LEFT";
   }
 });
