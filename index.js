@@ -17,8 +17,6 @@ let snake = [
   { x: Math.floor(WIDTH / 2), y: Math.floor(HEIGHT / 2) - 2 },
 ];
 
-
-
 const drawBoard = () => {
     board.innerHTML = "";
     board.style.width = `${40 * WIDTH}px`;
@@ -96,7 +94,7 @@ setInterval(() => {
   drawBoard();
 }, 150);
 
-drawBoard();
+
 
 window.addEventListener("keydown", (e) => {
   const key = e.key;
