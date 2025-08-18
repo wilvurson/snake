@@ -4,7 +4,6 @@ const unitSpace = 40;
 
 const board = document.querySelector(".board");
 
-// ✅ Score setup
 let score = 0;
 const scoreDiv = document.createElement("div");
 scoreDiv.className = "score";
