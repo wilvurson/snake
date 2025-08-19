@@ -58,7 +58,6 @@ const drawBoard = () => {
 const endGame = () => {
   gameOver = true;
 
-  // remove old overlay if it exists
   const oldOverlay = document.querySelector(".game-over");
   if (oldOverlay) oldOverlay.remove();
 
@@ -86,7 +85,6 @@ const endGame = () => {
     ];
     food = { x: getRandomInt(0, WIDTH), y: getRandomInt(0, HEIGHT) };
 
-    // remove overlay
     gameOverDiv.remove();
     drawBoard();
   });
@@ -112,7 +110,6 @@ setInterval(() => {
     newSnake[0] = { x: nextX, y: snake[0].y };
   }
 
-  // check self collision → GAME OVER
   for (let i = 0; i < snake.length; i++) {
     if (snake[i].x === newSnake[0].x && snake[i].y === newSnake[0].y) {
       endGame();
@@ -135,7 +132,7 @@ setInterval(() => {
 
   snake = newSnake;
   drawBoard();
-}, 150);
+}, 100);
 
 window.addEventListener("keydown", (e) => {
   const key = e.key;
