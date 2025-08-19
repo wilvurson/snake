@@ -58,6 +58,7 @@ const drawBoard = () => {
 const endGame = () => {
   gameOver = true;
 
+  // remove old overlay if it exists
   const oldOverlay = document.querySelector(".game-over");
   if (oldOverlay) oldOverlay.remove();
 
@@ -66,29 +67,46 @@ const endGame = () => {
   gameOverDiv.innerHTML = `
     <h1>Game Over</h1>
     <p>Your Score: ${score}</p>
-    <button id="restartBtn">Restart</button>
+    <p>Press <b>Enter</b> to Restart</p>
   `;
 
-  // append to body instead of board
   document.body.appendChild(gameOverDiv);
-
-  document.getElementById("restartBtn").addEventListener("click", () => {
-    // reset everything
-    score = 0;
-    scoreDiv.innerText = `Score: ${score}`;
-    DIRECTION = "RIGHT";
-    gameOver = false;
-    snake = [
-      { x: Math.floor(WIDTH / 2), y: Math.floor(HEIGHT / 2) },
-      { x: Math.floor(WIDTH / 2), y: Math.floor(HEIGHT / 2) - 1 },
-      { x: Math.floor(WIDTH / 2), y: Math.floor(HEIGHT / 2) - 2 },
-    ];
-    food = { x: getRandomInt(0, WIDTH), y: getRandomInt(0, HEIGHT) };
-
-    gameOverDiv.remove();
-    drawBoard();
-  });
 };
+
+const resetGame = () => {
+  score = 0;
+  scoreDiv.innerText = `Score: ${score}`;
+  DIRECTION = "RIGHT";
+  gameOver = false;
+  snake = [
+    { x: Math.floor(WIDTH / 2), y: Math.floor(HEIGHT / 2) },
+    { x: Math.floor(WIDTH / 2), y: Math.floor(HEIGHT / 2) - 1 },
+    { x: Math.floor(WIDTH / 2), y: Math.floor(HEIGHT / 2) - 2 },
+  ];
+  food = { x: getRandomInt(0, WIDTH), y: getRandomInt(0, HEIGHT) };
+
+  const overlay = document.querySelector(".game-over");
+  if (overlay) overlay.remove();
+
+  drawBoard();
+};
+
+// your existing arrow key handler + Enter
+window.addEventListener("keydown", (e) => {
+  const key = e.key;
+
+  if (!gameOver) {
+    if (key === "ArrowUp" && DIRECTION !== "BOTTOM") DIRECTION = "TOP";
+    else if (key === "ArrowDown" && DIRECTION !== "TOP") DIRECTION = "BOTTOM";
+    else if (key === "ArrowRight" && DIRECTION !== "LEFT") DIRECTION = "RIGHT";
+    else if (key === "ArrowLeft" && DIRECTION !== "RIGHT") DIRECTION = "LEFT";
+  } else {
+    if (key === "Enter") {
+      resetGame();
+    }
+  }
+});
+
 
 
 setInterval(() => {
@@ -110,6 +128,7 @@ setInterval(() => {
     newSnake[0] = { x: nextX, y: snake[0].y };
   }
 
+  // check self collision → GAME OVER
   for (let i = 0; i < snake.length; i++) {
     if (snake[i].x === newSnake[0].x && snake[i].y === newSnake[0].y) {
       endGame();
