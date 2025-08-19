@@ -1,38 +1,56 @@
 * {
   box-sizing: border-box;
 }
+
+.board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(20, 40px);
+  grid-template-rows: repeat(20, 40px);
+}
+
 body {
   display: flex;
   min-height: 100vh;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-}
-
-.board {
-  width: 640px;
-  height: 640px;
-  display: flex;
-  flex-wrap: wrap;
+  background-color: black;
 }
 
 .tile {
   width: 40px;
   height: 40px;
-  background-color: #ccc;
-  border-radius: 5px;
-  border: 1px solid #fff;
-}
-
-.body {
-  background-color: lime;
+  background-color: #2e2e2e;
+  border: 1px solid #3f3f3f;
 }
 
 .head {
-  background-color: green;
+  background: green;
+}
+.body {
+  background: lightgreen;
+}
+.food {
+  background: red;
 }
 
-.food {
-  background-color: red;
+.score {
+  font-size: 24px;
+  margin-bottom: 10px;
 }
- 
+
+.game-over {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: white;
+  background: rgba(51, 51, 51, 0.199);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
